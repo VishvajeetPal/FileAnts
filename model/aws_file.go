@@ -8,4 +8,5 @@ type Aws_File struct {
 	Extension string    `json:"extension" gorm:"column:extension"`
 	Password  string    `json:"password" gorm:"column:password"`
 	CreatedAt time.Time `json:"created_at" gorm:"column:created_at"`
+	MaxTime   int64     `json:"max_time" gorm:"column:max_time"`
 }

@@ -4,11 +4,13 @@ import (
 	"FileAnts/model"
 	repository "FileAnts/repository/db"
 	"FileAnts/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 	"net/http"
 	"path/filepath"
+	"time"
 )
 
 func UploadFile(c *gin.Context) (interface{}, error) {
@@ -44,6 +46,22 @@ func UploadFile(c *gin.Context) (interface{}, error) {
 		AwsLink:   newFileName,
 		FileId:    uuid.New().String(),
 		Extension: extension,
+	}
+
+	max := c.Param("min")
+
+	if max == "" {
+		return nil, fmt.Errorf("max time param is empty")
+	}
+
+	if max == "5" {
+		record.MaxTime = time.Now().Add(5 * time.Minute).Unix()
+	} else if max == "10" {
+		record.MaxTime = time.Now().Add(10 * time.Minute).Unix()
+	} else if max == "30" {
+		record.MaxTime = time.Now().Add(30 * time.Minute).Unix()
+	} else {
+		record.MaxTime = time.Now().Add(30 * time.Second).Unix()
 	}
 
 	if err := validator.New().Struct(record); err != nil {

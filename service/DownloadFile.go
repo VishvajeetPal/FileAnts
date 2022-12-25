@@ -6,6 +6,7 @@ import (
 	"FileAnts/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 func DownloadFile(c *gin.Context) (string, string, string, error) {
@@ -21,13 +22,17 @@ func DownloadFile(c *gin.Context) (string, string, string, error) {
 		return "", "", "", err
 	}
 
+	if res.MaxTime-time.Now().Unix() < 0 {
+		return "", "", "", fmt.Errorf("time limit Execeded")
+	}
+
 	err = utils.S3FileDownloader(res.AwsLink)
 	if err != nil {
 		fmt.Printf("%v", err)
 		return "", "", "", err
 	}
 
-	err = utils.Decrypt("./recordsTemp/download/"+res.AwsLink, res.AwsLink+"."+res.Extension)
+	err = utils.Decrypt("./recordsTemp/download/"+res.AwsLink, res.AwsLink+res.Extension)
 	if err != nil {
 		fmt.Printf("%v", err)
 		return "", "", "", err
