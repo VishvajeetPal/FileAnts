@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"FileAnts/model"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -31,6 +32,11 @@ func (d *Database) Connect() {
 	// Config connection pool
 	pgdb.SetMaxIdleConns(10)
 	pgdb.SetMaxOpenConns(100)
+
+	err = db.AutoMigrate(&model.Aws_File{})
+	if err != nil {
+		return
+	}
 	// Set DB connection as global
 	DB = db
 }
