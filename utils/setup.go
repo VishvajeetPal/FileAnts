@@ -8,6 +8,8 @@ import (
 func SetupFileStructure() error {
 
 	print("Creting DIR\n")
+	print("Creting DIR\n")
+
 	_, err := os.Stat("./recordsTemp")
 	if err == nil {
 		print(" DIR Err\n")
