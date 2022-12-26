@@ -35,7 +35,7 @@ func Encrypt(path string, name string) error {
 		return err
 	}
 
-	outfile, err := os.OpenFile("./recordsTemp/upload/"+name+".bin", os.O_RDWR|os.O_CREATE, 0777)
+	outfile, err := os.OpenFile("/app/recordsTemp/upload/"+name+".bin", os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,7 +98,7 @@ func Decrypt(path string, name string) error {
 		return err
 	}
 
-	outfile, err := os.OpenFile("./recordsTemp/download/"+name, os.O_RDWR|os.O_CREATE, 0777)
+	outfile, err := os.OpenFile("/app/recordsTemp/download/"+name, os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		return err
 	}
