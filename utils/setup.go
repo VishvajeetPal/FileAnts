@@ -12,8 +12,7 @@ func SetupFileStructure() error {
 
 	_, err := os.Stat("./recordsTemp")
 	if err == nil {
-		print(" DIR Err\n")
-		print(err.Error())
+		print("DIR Was present\n")
 		return nil
 	}
 	if os.IsNotExist(err) {
