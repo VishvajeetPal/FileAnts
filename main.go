@@ -12,7 +12,15 @@ import (
 )
 
 func main() {
-	err := utils.SetupFileStructure()
+
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("File path = \n%v\n\n", pwd)
+
+	err = utils.SetupFileStructure()
 	if err != nil {
 		print(err.Error())
 		return
