@@ -32,11 +32,11 @@ func DownloadFile(c *gin.Context) (string, string, string, error) {
 		return "", "", "", err
 	}
 
-	err = utils.Decrypt("./recordsTemp/download/"+res.AwsLink, res.AwsLink+res.Extension)
+	err = utils.Decrypt("./app/recordsTemp/download/"+res.AwsLink, res.AwsLink+res.Extension)
 	if err != nil {
 		fmt.Printf("%v", err)
 		return "", "", "", err
 	}
 
-	return "./recordsTemp/download/", res.AwsLink + res.Extension, "./recordsTemp/download/" + res.AwsLink, nil
+	return "./app/recordsTemp/download/", res.AwsLink + res.Extension, "./app/recordsTemp/download/" + res.AwsLink, nil
 }

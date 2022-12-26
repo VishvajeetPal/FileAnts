@@ -7,12 +7,12 @@ import (
 
 func Clear(c *gin.Context) (interface{}, error) {
 
-	err := os.RemoveAll("./recordsTemp/download/")
+	err := os.RemoveAll("./app/recordsTemp/download/")
 	if err != nil {
 		return nil, err
 	}
 
-	err = os.MkdirAll("./recordsTemp/download/", 777)
+	err = os.MkdirAll("./app/recordsTemp/download/", 777)
 	if err != nil {
 		return nil, err
 	}
